@@ -1,18 +1,19 @@
 class Solution {
     public int getSecondLargest(int[] arr) {
-         Set<Integer> set = new HashSet<>();
-        for (int num : arr) {
-            set.add(num);
+        HashSet<Integer> ab=new HashSet<>();
+        for(int i=0;i<arr.length;i++){
+            ab.add(arr[i]);
         }
-        if (set.size() < 2) return -1;
-    PriorityQueue<Integer> pq = new PriorityQueue<>();
-   for(int i:set){
-        pq.add(i);
-        if(pq.size()>2){
-            pq.poll();
+          if (ab.size() < 2) {
+            return -1; // or throw an exception
         }
-        
-    }
-    return pq.peek();
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        for(int u:ab){
+            pq.offer(u);
+            if(pq.size()>2){
+                pq.remove();
+            }
+        }
+        return pq.poll();
     }
 }
