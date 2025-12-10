@@ -1,26 +1,32 @@
 /*
-class Node
-{
+class Node {
     int data;
     Node left, right;
 
-    Node(int item)
-    {
-        data = item;
-        left = right = null;
+    Node(int val) {
+        this.data = val;
+        this.left = null;
+        this.right = null;
     }
-}*/
+}
+*/
+
 class Solution {
-    ArrayList<Integer> leftView(Node root) {
-     
-    ArrayList<Integer> res=new ArrayList<>();
-        solver(res,0,root);
-        return res;
+    private int maxDepth=-1;
+    public ArrayList<Integer> leftView(Node root) {
+        ArrayList<Integer> result=new ArrayList<>();
+        solver(result,root,0);
+        return result;
     }
-    public void solver(ArrayList<Integer>res,int Idx,Node root){
-        if(root==null) return ;
-        if(Idx>=res.size()) res.add(root.data);
-        solver(res,Idx+1,root.left);
-        solver(res,Idx+1,root.right);
+    public void solver(ArrayList<Integer>result,Node root,int Idx){
+        if(root==null){
+            return;
+        }
+        if(maxDepth<Idx){
+            maxDepth=Idx;
+            result.add(root.data);
+        }
+        if(root.left!=null) solver(result,root.left,Idx+1);
+        if(root.right!=null) solver(result,root.right,Idx+1);
     }
 }
